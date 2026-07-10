@@ -1,5 +1,4 @@
 # Nebtube
-# Description
 Web App designed to integrate Youtube and Nebula RSS feeds seemelessly into one app
 
 # Stack
