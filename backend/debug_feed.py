@@ -1,1 +1,0 @@
-import re; s = '<a href=\"x\"><img src=\"https://images.nebula.tv/abc.jpg\" /></a>'; print(re.search(r'<img[^>]+src=\"([^\"]+)\"', s).group(1))
