@@ -9,10 +9,12 @@ load_dotenv()
 # On Railway, this env var is provided automatically once you attach a Postgres service.
 DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///./local.db")
 
-# Railway/Render sometimes give a URL starting with "postgres://" but SQLAlchemy
-# needs "postgresql://" — this line fixes that automatically.
 if DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+
+# Force SQLAlchemy to use psycopg3 instead of defaulting to psycopg2
+if DATABASE_URL.startswith("postgresql://"):
+    DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+psycopg://", 1)
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
